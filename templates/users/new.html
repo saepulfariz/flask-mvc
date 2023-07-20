@@ -1,0 +1,42 @@
+{% extends 'template/index.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1 class="text-white">New Users</h1>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+
+                    <form action="{{url_for('user_bp.create')}}" method="post">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                        <div class="mb-3">
+                            <label for="name">Name</label>
+                            <input class="form-control" type="text" id="name" name="name">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="age">Age</label>
+                            <input class="form-control" type="number" id="age" name="age">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="address">address</label>
+                            <input class="form-control" type="text" id="address" name="address">
+                        </div>
+                        <button class="btn btn-primary btn-sm" type="submit">Submit</button>
+                        <a href="{{ url_for('user_bp.index') }}" class="btn btn-secondary btn-sm ">Back</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

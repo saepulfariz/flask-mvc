@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ data.title }} | FLASK - SAEPULFARIZ</title>
+    <link href="{{ url_for('static', filename = 'bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    {% block head %} {% endblock %}
+</head>
+
+<body class="bg-dark ">
+
+    <div id="flash"
+        data-icon="{% with messages = get_flashed_messages(category_filter='icon') %}{% if messages %}{{ messages[0] }}{% endif %}{% endwith %}"
+        data-title="{% with messages = get_flashed_messages(category_filter='title') %}{% if messages %}{{ messages[0] }}{% endif %}{% endwith %}"
+        data-text="{% with messages = get_flashed_messages(category_filter='text') %}{% if messages %}{{ messages[0] }}{% endif %}{% endwith %}"
+        data-url=""></div>
+
+
+    <!-- {% include "template/topbar.html" %} -->
+    {% block content %} {% endblock %}
+
+    <script src="{{ url_for('static', filename = 'bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ url_for('static', filename = 'jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename = 'sweetalert2/sweetalert2.all.min.js') }}"></script>
+    <script src="{{ url_for('static', filename = 'alert_jquery.js') }}"></script>
+
+    {% block script %} {% endblock %}
+</body>
+
+</html>

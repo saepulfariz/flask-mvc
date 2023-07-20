@@ -1,0 +1,50 @@
+{% extends 'template/index.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1 class="text-white">Users</h1>
+            <a href="{{ url_for('user_bp.new') }}" class="btn btn-primary btn-sm mb-2">New</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-7">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td>No</td>
+                        <td>Nama</td>
+                        <td>Age</td>
+                        <td>Address</td>
+                        <td>Action</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in data.users %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ user.name }} </td>
+                        <td>{{ user.age }} </td>
+                        <td>{{ user.address }} </td>
+                        <td>
+                            <a href="{{url_for('user_bp.show', userId=user.id)}}"
+                                class="btn btn-info btn-sm mb-2">Show</a>
+                            <a href="{{url_for('user_bp.edit', userId=user.id)}}"
+                                class="btn btn-warning btn-sm mb-2">Edit</a>
+                            <form action="{{url_for('user_bp.delete', userId=user.id)}}" method="POST">
+                                <input type="hidden" name="_method" value="DELETE" />
+                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                                <button type="button" onclick="deleteTombol(this)"
+                                    class="btn btn-danger btn-sm mb-2">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
